@@ -1,14 +1,13 @@
-from typing import List
-from itertools import chain
 from collections import Counter
+from itertools import chain
+from typing import List
 
 
 class Solution:
     def makeEqual(self, words: List[str]) -> bool:
-        return all(f % len(words) == 0 for f in Counter(chain(*words)).values())
+        return not any(f % len(words) for f in Counter(chain(*words)).values())
 
 
 solution = Solution()
-
-solution.makeEqual(words=["abc", "aabc", "bc"]) is True
-solution.makeEqual(words=["ab","a"]) is False
+assert solution.makeEqual(words=["abc", "aabc", "bc"]) is True
+assert solution.makeEqual(words=["ab", "a"]) is False
