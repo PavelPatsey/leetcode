@@ -12,8 +12,8 @@ defmodule Solution do
   @spec reduce_row(row :: String.t()) :: integer
   def reduce_row(row) do
     row
-    |> String.graphemes()
-    |> Enum.reduce(0, fn x, acc -> String.to_integer(x) + acc end)
+    |> String.to_charlist()
+    |> Enum.count(fn x -> x == ?1 end)
   end
 end
 
