@@ -1,3 +1,4 @@
+from itertools import pairwise
 from math import prod
 from typing import List
 
@@ -5,7 +6,7 @@ from typing import List
 class Solution:
     def numberOfBeams(self, bank: List[str]) -> int:
         lst = [string.count("1") for string in bank if "1" in string]
-        return sum(map(prod, zip(lst, lst[1:])))
+        return sum(map(prod, pairwise(lst)))
 
 
 solution = Solution()
