@@ -3,7 +3,7 @@ defmodule Solution do
   def number_of_beams(bank) do
     bank
     |> Enum.map(&Solution.reduce_row/1)
-    |> Enum.filter(fn x -> x > 0 end)
+    |> Enum.reject(fn x -> x == 0 end)
     |> Enum.chunk_every(2, 1, :discard)
     |> Enum.map(&Enum.product/1)
     |> Enum.sum()
