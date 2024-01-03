@@ -1,10 +1,11 @@
+from math import prod
 from typing import List
 
 
 class Solution:
     def numberOfBeams(self, bank: List[str]) -> int:
         lst = [string.count("1") for string in bank if "1" in string]
-        return sum(map(lambda x: x[0] * x[1], zip(lst, lst[1:])))
+        return sum(map(prod, zip(lst, lst[1:])))
 
 
 solution = Solution()
