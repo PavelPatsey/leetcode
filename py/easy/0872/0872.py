@@ -32,7 +32,7 @@ class TreeNode:
         queue = deque([self])
         while queue:
             node = queue.popleft()
-            print(node.val, end=' ')
+            print(node.val, end=" ")
             if node.left:
                 queue.append(node.left)
             if node.right:
@@ -41,7 +41,7 @@ class TreeNode:
 
     def print_tree_dfs(self):
         if self:
-            print(self.val, end=' ')
+            print(self.val, end=" ")
             if self.left:
                 self.left.print_tree_dfs()
             if self.right:
@@ -57,30 +57,45 @@ class Solution:
                 return [node.val]
             return dfs(node.left) + dfs(node.right)
 
-        print(dfs(root1))
-        print(dfs(root2))
         return dfs(root1) == dfs(root2)
 
 
 sulution = Solution()
-null = None
 
-lst_1 = [3, 5, 1, 6, 2, 9, 8, null, null, 7, 4]
-root_1 = TreeNode(lst_1[0])
-for value in lst_1[1:]:
-    root_1.insert_node_bfs(value)
+root_1 = TreeNode(3)
+root_1.left = TreeNode(5)
+root_1.left.left = TreeNode(6)
+root_1.left.right = TreeNode(2)
+root_1.left.right.left = TreeNode(7)
+root_1.left.right.right = TreeNode(4)
+root_1.right = TreeNode(1)
+root_1.right.left = TreeNode(9)
+root_1.right.right = TreeNode(8)
 
-lst_2 = [3, 5, 1, 6, 7, 4, 2, null, null, null, null, null, null, 9, 8]
-root_2 = TreeNode(lst_2[0])
-for value in lst_2[1:]:
-    root_2.insert_node_bfs(value)
+root_2 = TreeNode(3)
+root_2.left = TreeNode(5)
+root_2.left.left = TreeNode(6)
+root_2.left.right = TreeNode(7)
+root_2.right = TreeNode(1)
+root_2.right.left = TreeNode(4)
+root_2.right.right = TreeNode(2)
+root_2.right.right.left = TreeNode(9)
+root_2.right.right.right = TreeNode(8)
 
 root_1.print_tree_bfs()
 root_2.print_tree_bfs()
 
-root_1.print_tree_dfs()
-print()
-root_2.print_tree_dfs()
-print()
-
 assert sulution.leafSimilar(root_1, root_2) is True
+
+root_1 = TreeNode(1)
+root_1.left = TreeNode(2)
+root_1.right = TreeNode(3)
+
+root_2 = TreeNode(1)
+root_2.left = TreeNode(3)
+root_2.right = TreeNode(2)
+
+root_1.print_tree_bfs()
+root_2.print_tree_bfs()
+
+assert sulution.leafSimilar(root_1, root_2) is False
