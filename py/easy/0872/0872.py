@@ -60,7 +60,7 @@ class Solution:
         return dfs(root1) == dfs(root2)
 
 
-sulution = Solution()
+solution = Solution()
 
 root_1 = TreeNode(3)
 root_1.left = TreeNode(5)
@@ -85,7 +85,7 @@ root_2.right.right.right = TreeNode(8)
 root_1.print_tree_bfs()
 root_2.print_tree_bfs()
 
-assert sulution.leafSimilar(root_1, root_2) is True
+assert solution.leafSimilar(root_1, root_2) is True
 
 root_1 = TreeNode(1)
 root_1.left = TreeNode(2)
@@ -98,4 +98,4 @@ root_2.right = TreeNode(2)
 root_1.print_tree_bfs()
 root_2.print_tree_bfs()
 
-assert sulution.leafSimilar(root_1, root_2) is False
+assert solution.leafSimilar(root_1, root_2) is False
