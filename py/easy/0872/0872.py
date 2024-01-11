@@ -8,7 +8,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
-    def build_tree_bfs(self, val):
+    def insert_node_bfs(self, val):
         if val is None:
             return
 
@@ -68,12 +68,12 @@ null = None
 lst_1 = [3, 5, 1, 6, 2, 9, 8, null, null, 7, 4]
 root_1 = TreeNode(lst_1[0])
 for value in lst_1[1:]:
-    root_1.build_tree_bfs(value)
+    root_1.insert_node_bfs(value)
 
 lst_2 = [3, 5, 1, 6, 7, 4, 2, null, null, null, null, null, null, 9, 8]
 root_2 = TreeNode(lst_2[0])
 for value in lst_2[1:]:
-    root_2.build_tree_bfs(value)
+    root_2.insert_node_bfs(value)
 
 root_1.print_tree_bfs()
 root_2.print_tree_bfs()
