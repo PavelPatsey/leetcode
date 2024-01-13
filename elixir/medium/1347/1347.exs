@@ -10,11 +10,7 @@ defmodule Solution do
       if key in Map.keys(t_map) do
         difference = Map.get(s_map, key) - Map.get(t_map, key)
 
-        if difference < 0 do
-          0
-        else
-          difference
-        end
+        if difference < 0, do: 0, else: difference
       else
         value
       end
