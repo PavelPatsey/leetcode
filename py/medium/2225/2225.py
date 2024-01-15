@@ -5,7 +5,7 @@ from typing import List
 
 class Solution:
     def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
-        [winners, losers] = list(zip(*matches))
+        losers = map(lambda x: x[1], matches)
         counter_losers = Counter(losers)
 
         players = set(chain.from_iterable(matches))
