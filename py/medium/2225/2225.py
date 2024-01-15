@@ -5,10 +5,10 @@ from typing import List
 
 class Solution:
     def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
-        losers = map(lambda x: x[1], matches)
+        [winners, losers] = list(zip(*matches))
         counter_losers = Counter(losers)
 
-        players = set(chain.from_iterable(matches))
+        players = set(chain(winners, losers))
         answer = [[], []]
 
         for player in players:
@@ -16,8 +16,7 @@ class Solution:
                 answer[0].append(player)
             if player in counter_losers and counter_losers[player] == 1:
                 answer[1].append(player)
-        answer = [sorted(answer[0]), sorted(answer[1])]
-        return answer
+        return [sorted(answer[0]), sorted(answer[1])]
 
 
 solution = Solution()
