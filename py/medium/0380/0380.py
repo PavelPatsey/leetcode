@@ -12,9 +12,8 @@ class RandomizedSet:
         """
         if val in self.randomized_set:
             return False
-        else:
-            self.randomized_set.add(val)
-            return True
+        self.randomized_set.add(val)
+        return True
 
     def remove(self, val: int) -> bool:
         """
@@ -23,8 +22,7 @@ class RandomizedSet:
         if val in self.randomized_set:
             self.randomized_set.remove(val)
             return True
-        else:
-            return False
+        return False
 
     def getRandom(self) -> int:
         """
