@@ -14,7 +14,7 @@ class Solution:
         for player in players:
             if player not in counter_losers:
                 answer[0].append(player)
-            if player in counter_losers and counter_losers[player] == 1:
+            if counter_losers[player] == 1:
                 answer[1].append(player)
         return [sorted(answer[0]), sorted(answer[1])]
 
