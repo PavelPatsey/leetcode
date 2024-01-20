@@ -10,7 +10,8 @@ defmodule Solution do
       |> Enum.map(fn [_, x] -> x end)
       |> Enum.frequencies()
 
-    [losers_filter(players, losers_frequencies, 0), losers_filter(players, losers_frequencies, 1)]
+    [0, 1]
+    |> Enum.map(fn x -> losers_filter(players, losers_frequencies, x) end)
   end
 
   @spec losers_filter(players :: [integer], frequencies :: Map, n :: integer) :: [[integer]]
