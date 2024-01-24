@@ -51,7 +51,7 @@ class Tree:
             return self.tree_nodes[2 * idx + 2]
         return None
 
-    def root(self):
+    def root(self) -> TreeNode:
         return self.tree_nodes[0]
 
 
