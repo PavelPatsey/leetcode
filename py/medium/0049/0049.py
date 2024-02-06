@@ -4,10 +4,14 @@ from typing import List
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        words_dict = defaultdict(list)
+        result = defaultdict(list)
+        ord_a = ord("a")
         for word in strs:
-            words_dict["".join(sorted(word))].append(word)
-        return list(words_dict.values())
+            count = [0] * 26
+            for char in word:
+                count[ord(char) - ord_a] += 1
+            result[tuple(count)].append(word)
+        return list(result.values())
 
 
 solution = Solution()
