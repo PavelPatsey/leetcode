@@ -6,23 +6,9 @@ defmodule Solution do
 
   @spec group_anagrams(strs :: [String.t()]) :: [[String.t()]]
   def group_anagrams(strs) do
-    get_map(%{}, strs)
+    strs
+    |> Enum.group_by(&get_signature/1)
     |> Map.values()
-  end
-
-  defp get_map(map, []) do
-    map
-  end
-
-  defp get_map(map, [head | tail]) do
-    key = get_signature(head)
-
-    {_, new_map} =
-      Map.get_and_update(map, key, fn current_value ->
-        {current_value, if(current_value == nil, do: [head], else: [head | current_value])}
-      end)
-
-    get_map(new_map, tail)
   end
 
   @spec get_signature(str :: String.t()) :: {integer()}
@@ -55,8 +41,8 @@ defmodule AssertionTest do
 
   test "group_anagrams 1" do
     assert Solution.group_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"]) == [
-             ["nat", "tan"],
-             ["ate", "tea", "eat"],
+             ["tan", "nat"],
+             ["eat", "tea", "ate"],
              ["bat"]
            ]
   end
