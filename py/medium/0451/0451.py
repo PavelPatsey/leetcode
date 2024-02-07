@@ -1,12 +1,9 @@
 from collections import Counter
-from operator import itemgetter
 
 
 class Solution:
     def frequencySort(self, s: str) -> str:
-        sorted_list = sorted(Counter(s).items(), key=itemgetter(1), reverse=True)
-        result = [item[0] * item[1] for item in sorted_list]
-        return "".join(result)
+        return "".join((k * v for k, v in Counter(s).most_common()))
 
 
 solution = Solution()
