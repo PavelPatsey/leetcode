@@ -9,7 +9,7 @@ class Solution:
         dp[0] = 0
         for target in range(1, n + 1):
             for square in squares:
-                if n - square < 0:
+                if target - square < 0:
                     break
                 dp[target] = min(dp[target], 1 + dp[target - square])
         return dp[n]
