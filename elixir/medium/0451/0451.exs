@@ -24,6 +24,6 @@ defmodule AssertionTest do
   end
 
   test "frequency_sort 3" do
-    assert Solution.frequency_sort("bbaA") == "bbAa"
+    assert Solution.frequency_sort("bbaA") == "bbaA"
   end
 end
