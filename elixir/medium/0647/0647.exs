@@ -24,16 +24,15 @@ defmodule Solution do
     get_count(tuple_s, count, i + 1)
   end
 
-  def while(tuple_s, acc, _i, left, right) when left < 0 or right >= tuple_size(tuple_s) do
+  def while(tuple_s, acc, _i, left, right)
+      when left < 0 or
+             right >= tuple_size(tuple_s) or
+             elem(tuple_s, left) != elem(tuple_s, right) do
     acc
   end
 
   def while(tuple_s, acc, i, left, right) do
-    if elem(tuple_s, left) == elem(tuple_s, right) do
-      while(tuple_s, acc + 1, i, left - 1, right + 1)
-    else
-      acc
-    end
+    while(tuple_s, acc + 1, i, left - 1, right + 1)
   end
 end
 
