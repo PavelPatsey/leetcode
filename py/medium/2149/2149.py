@@ -14,8 +14,7 @@ class Solution:
                 assert False
         result = []
         for p, n in zip(positives, negatives):
-            result.append(p)
-            result.append(n)
+            result.extend([p, n])
         return result
 
 
