@@ -1,17 +1,14 @@
 defmodule Solution do
   @spec largest_perimeter(nums :: [integer]) :: integer
   def largest_perimeter(nums) do
-    sorted_nums =
-      nums
-      |> Enum.sort()
-
-    do_largest_perimeter(sorted_nums, 0, -1)
-    |> IO.inspect()
+    nums
+    |> Enum.sort()
+    |> then(&do_largest_perimeter(&1, 0, -1))
   end
 
   def do_largest_perimeter([], _acc, result), do: result
 
-  def do_largest_perimeter([head | tail], acc, result) when acc > head do
+  def do_largest_perimeter([head | tail], acc, _result) when acc > head do
     do_largest_perimeter(tail, acc + head, acc + head)
   end
 
