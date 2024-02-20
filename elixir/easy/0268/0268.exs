@@ -3,12 +3,7 @@ defmodule Solution do
   def missing_number(nums) do
     n = length(nums)
 
-    sum =
-      0..n
-      |> Enum.to_list()
-      |> Enum.sum()
-
-    sum - Enum.sum(nums)
+    Enum.sum(0..n) - Enum.sum(nums)
   end
 end
 
