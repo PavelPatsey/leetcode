@@ -2,8 +2,8 @@ defmodule Solution do
   @spec missing_number(nums :: [integer]) :: integer
   def missing_number(nums) do
     n = length(nums)
-
-    Enum.sum(0..n) - Enum.sum(nums)
+    sum = div(n * (n + 1), 2)
+    sum - Enum.sum(nums)
   end
 end
 
