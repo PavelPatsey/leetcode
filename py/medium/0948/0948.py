@@ -8,10 +8,9 @@ class Solution:
         sorted_tokens = deque(sorted(tokens))
 
         while sorted_tokens:
-            if sorted_tokens[0] <= power:
+            while sorted_tokens and sorted_tokens[0] <= power:
                 power -= sorted_tokens.popleft()
                 score += 1
-                continue
             if score >= 1 and len(sorted_tokens) >= 2:
                 power += sorted_tokens.pop()
                 score -= 1
