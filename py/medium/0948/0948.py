@@ -6,13 +6,16 @@ class Solution:
     def bagOfTokensScore(self, tokens: List[int], power: int) -> int:
         score = 0
         sorted_tokens = deque(sorted(tokens))
+        l, r = 0, len(sorted_tokens) - 1
 
-        while sorted_tokens:
-            while sorted_tokens and sorted_tokens[0] <= power:
-                power -= sorted_tokens.popleft()
+        while True:
+            while l <= r and sorted_tokens[l] <= power:
+                power -= sorted_tokens[l]
+                l += 1
                 score += 1
-            if score >= 1 and len(sorted_tokens) >= 2:
-                power += sorted_tokens.pop()
+            if score >= 1 and l < r:
+                power += sorted_tokens[r]
+                r -= 1
                 score -= 1
             else:
                 break
