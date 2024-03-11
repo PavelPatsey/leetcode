@@ -3,9 +3,8 @@ defmodule Solution do
   def custom_sort_string(order, s) do
     s
     |> String.graphemes()
-    |> IO.inspect()
-    |> Enum.sort(&get_index(&1, order))
-    |> IO.inspect()
+    |> Enum.sort_by(&get_index(&1, order))
+    |> Enum.join()
   end
 
   def get_index(char, order) do
@@ -37,7 +36,7 @@ defmodule AssertionTest do
     assert Solution.get_index("z", "abcd") == -1
   end
 
-  # test "test custom_sort_string" do
-  #   assert Solution.custom_sort_string("cba", "abcd") == "dcba"
-  # end
+  test "test custom_sort_string" do
+    assert Solution.custom_sort_string("cba", "abcd") == "dcba"
+  end
 end
