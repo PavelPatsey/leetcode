@@ -1,5 +1,4 @@
 from typing import List
-from copy import deepcopy
 
 
 class Solution:
@@ -13,11 +12,11 @@ class Solution:
             if index == len(word) - 1:
                 return True
 
-            new_visited = deepcopy(visited)
+            new_visited = visited.copy()
             new_visited.add((r, c))
             new_index = index + 1
 
-            lst = []
+            result = []
             for dr, dc in self.DIR_LIST:
                 new_r, new_c = r + dr, c + dc
                 if (
@@ -26,8 +25,8 @@ class Solution:
                     and board[new_r][new_c] == word[new_index]
                     and (new_r, new_c) not in visited
                 ):
-                    lst.append(_is_exist_dfs(new_visited, new_index, new_r, new_c))
-            return any(lst)
+                    result.append(_is_exist_dfs(new_visited, new_index, new_r, new_c))
+            return any(result)
 
         len_rows = len(board)
         len_cols = len(board[0])
