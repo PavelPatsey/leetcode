@@ -4,9 +4,9 @@ class Solution:
         for char in s:
             if char == "(":
                 current_counter += 1
+                max_counter = max(max_counter, current_counter)
             elif char == ")":
                 current_counter -= 1
-            max_counter = max(max_counter, current_counter)
 
         return max_counter
 
