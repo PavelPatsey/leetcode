@@ -2,23 +2,22 @@ defmodule Solution do
   @spec count_students(students :: [integer], sandwiches :: [integer]) :: integer
   def count_students(students, sandwiches) do
     do_count_students(students, sandwiches)
-    |> length()
   end
 
-  defp do_count_students([], _) do
-    []
+  defp do_count_students([], []), do: 0
+
+  defp do_count_students([students_head | students_tail], [sandwiches_head | sandwiches_tail])
+       when students_head == sandwiches_head do
+    do_count_students(students_tail, sandwiches_tail)
   end
 
-  defp do_count_students([st_head | st_tail], [sand_head | sand_tail])
-       when st_head == sand_head do
-    do_count_students(st_tail, sand_tail)
-  end
+  defp do_count_students(students, sandwiches) do
+    [students_head | students_tail] = students
 
-  defp do_count_students([st_head | st_tail], [sand_head | sand_tail]) do
-    if sand_head not in [st_head | st_tail] do
-      [st_head | st_tail]
+    if hd(sandwiches) not in students do
+      length(students)
     else
-      do_count_students(Enum.concat(st_tail, [st_head]), [sand_head | sand_tail])
+      do_count_students(Enum.concat(students_tail, [students_head]), sandwiches)
     end
   end
 end
@@ -31,7 +30,7 @@ defmodule AssertionTest do
   test "test count_students" do
     assert Solution.count_students([1], [1]) == 0
     assert Solution.count_students([1], [0]) == 1
-    # assert Solution.count_students([1, 1, 0, 0], [0, 1, 0, 1]) == 0
-    # assert Solution.count_students([1, 1, 1, 0, 0, 1], [1, 0, 0, 0, 1, 1]) == 3
+    assert Solution.count_students([1, 1, 0, 0], [0, 1, 0, 1]) == 0
+    assert Solution.count_students([1, 1, 1, 0, 0, 1], [1, 0, 0, 0, 1, 1]) == 3
   end
 end
