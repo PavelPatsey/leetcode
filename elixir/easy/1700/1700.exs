@@ -14,14 +14,11 @@ defmodule Solution do
     do_count_students(st_tail, sand_tail)
   end
 
-  defp do_count_students(students, sandwiches) do
-    [st_head | st_tail] = students
-    [sand_head | _sand_tail] = sandwiches
-
-    if sand_head not in students do
-      students
+  defp do_count_students([st_head | st_tail], [sand_head | sand_tail]) do
+    if sand_head not in [st_head | st_tail] do
+      [st_head | st_tail]
     else
-      do_count_students(Enum.concat(st_tail, [st_head]), sandwiches)
+      do_count_students(Enum.concat(st_tail, [st_head]), [sand_head | sand_tail])
     end
   end
 end
