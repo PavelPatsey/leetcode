@@ -9,11 +9,9 @@ defmodule Solution do
 
   defp do_time_required_to_buy([head | tail], i, k, k_ticket, acc) do
     if i <= k do
-      new_acc = acc + min(head, k_ticket)
-      do_time_required_to_buy(tail, i + 1, k, k_ticket, new_acc)
+      do_time_required_to_buy(tail, i + 1, k, k_ticket, acc + min(head, k_ticket))
     else
-      new_acc = acc + min(head, k_ticket - 1)
-      do_time_required_to_buy(tail, i + 1, k, k_ticket, new_acc)
+      do_time_required_to_buy(tail, i + 1, k, k_ticket, acc + min(head, k_ticket - 1))
     end
   end
 end
