@@ -1,10 +1,7 @@
-
-
 defmodule Solution do
   @spec special_array(nums :: [integer]) :: integer
   def special_array(nums) do
-    len_nums = length(nums)
-    do_special_array(0, len_nums, nums)
+    do_special_array(0, length(nums), nums)
   end
 
   defp do_special_array(x, len_nums, _nums) when x > len_nums, do: -1
@@ -22,11 +19,14 @@ defmodule Solution do
   defp get_counter(_x, counter, []), do: counter
 
   defp get_counter(x, counter, [head | tail]) do
-    if head >= x do
-      get_counter(x, counter + 1, tail)
-    else
-      get_counter(x, counter, tail)
-    end
+    counter =
+      if head >= x do
+        counter + 1
+      else
+        counter
+      end
+
+    get_counter(x, counter, tail)
   end
 end
 
