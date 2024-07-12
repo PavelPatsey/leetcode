@@ -25,5 +25,5 @@ class Solution:
 
 
 solution = Solution()
-solution.reverseParentheses("(abcd)") == "dcba"
-solution.reverseParentheses("(u(love)i)") == "iloveu"
+assert solution.reverseParentheses("(abcd)") == "dcba"
+assert solution.reverseParentheses("(u(love)i)") == "iloveu"
