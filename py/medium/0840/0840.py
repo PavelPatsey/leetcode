@@ -4,11 +4,12 @@ from typing import List
 class Solution:
     @staticmethod
     def is_magic_matrix(matrix, i, j):
-        elements = set()
-        for r in range(i, i + 3):
-            for c in range(j, j + 3):
-                if 1 <= matrix[r][c] <= 9:
-                    elements.add(matrix[r][c])
+        elements = {
+            matrix[r][c]
+            for c in range(j, j + 3)
+            for r in range(i, i + 3)
+            if 1 <= matrix[r][c] <= 9
+        }
         if len(elements) != 9:
             return False
 
