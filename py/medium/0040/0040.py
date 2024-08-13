@@ -3,31 +3,24 @@ from typing import List
 
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-        def _get_list_of_unique_lists(
-            list_of_lists: List[List[int]],
-        ) -> List[List[int]]:
-            return [
-                item
-                for i, item in enumerate(list_of_lists)
-                if item not in list_of_lists[:i]
-            ]
-
         result = []
         sorted_candidates = sorted(candidates)
 
-        def dfs(i, sub_list):
-            if sum(sub_list) == target:
+        def dfs(i, sub_list, sub_sum):
+            if sub_sum == target and sub_list not in result:
                 result.append(sub_list)
                 return
-            if sum(sub_list) > target:
+            if sub_sum > target:
                 return
             if i >= len(sorted_candidates):
                 return
-            dfs(i + 1, sub_list + [sorted_candidates[i]])
-            dfs(i + 1, sub_list.copy())
+            dfs(
+                i + 1, sub_list + [sorted_candidates[i]], sub_sum + sorted_candidates[i]
+            )
+            dfs(i + 1, sub_list.copy(), sub_sum + 0)
 
-        dfs(0, [])
-        return _get_list_of_unique_lists(result)
+        dfs(0, [], 0)
+        return result
 
 
 solution = Solution()
