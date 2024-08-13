@@ -6,20 +6,22 @@ class Solution:
         result = []
         sorted_candidates = sorted(candidates)
 
-        def dfs(i, sub_list, sub_sum):
-            if sub_sum == target and sub_list not in result:
-                result.append(sub_list)
+        def backtrack(cur, pos, target):
+            if target == 0:
+                result.append(cur.copy())
+            if target <= 0:
                 return
-            if sub_sum > target:
-                return
-            if i >= len(sorted_candidates):
-                return
-            dfs(
-                i + 1, sub_list + [sorted_candidates[i]], sub_sum + sorted_candidates[i]
-            )
-            dfs(i + 1, sub_list.copy(), sub_sum + 0)
 
-        dfs(0, [], 0)
+            previous = -1
+            for i in range(pos, len(sorted_candidates)):
+                if sorted_candidates[i] == previous:
+                    continue
+                cur.append(sorted_candidates[i])
+                backtrack(cur, i + 1, target - sorted_candidates[i])
+                cur.pop()
+                previous = sorted_candidates[i]
+
+        backtrack([], 0, target)
         return result
 
 
@@ -32,3 +34,7 @@ assert solution.combinationSum2([10, 1, 2, 7, 6, 1, 5], 8) == [
 ]
 
 assert solution.combinationSum2([2, 5, 2, 1, 2], 5) == [[1, 2, 2], [5]]
+
+
+n = 10
+assert solution.combinationSum2([1] * 1_000, n) == [[1] * n]
