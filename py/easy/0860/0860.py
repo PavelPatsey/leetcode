@@ -26,6 +26,7 @@ class Solution:
                 assert False
         return True
 
+
 solution = Solution()
 assert solution.lemonadeChange([5, 5, 5, 10, 20]) is True
 assert solution.lemonadeChange([5, 5, 10, 10, 20]) is False
