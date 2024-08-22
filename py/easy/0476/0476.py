@@ -1,14 +1,9 @@
 class Solution:
     def findComplement(self, num: int) -> int:
-        bin_num = bin(num)
-        new_bin_num = bin_num[:2]
-        for b in bin_num[2:]:
-            if b == "1":
-                new_bin_num += "0"
-            else:
-                new_bin_num += "1"
-        new_num = int(new_bin_num, 2)
-        return new_num
+        new_bin_num = ""
+        for bit in bin(num)[2:]:
+            new_bin_num += "1" if bit == "0" else "0"
+        return int(new_bin_num, 2)
 
 
 solution = Solution()
