@@ -2,7 +2,7 @@ from typing import List
 
 
 class Solution:
-    VECTORS = ((0, 1), (1, 0), (0, -1), (-1, 0))
+    DIRECTIONS = ((0, 1), (1, 0), (0, -1), (-1, 0))
 
     @staticmethod
     def change_index(index, command):
@@ -11,27 +11,28 @@ class Solution:
 
     def robotSim(self, commands: List[int], obstacles: List[List[int]]) -> int:
         index = 0
-        coordinates = [0, 0]
+        point = [0, 0]
         max_distance = 0
         for command in commands:
             if command in {-1, -2}:
                 index = self.change_index(index, command)
             else:
-                vector = self.VECTORS[index]
+                direction = self.DIRECTIONS[index]
                 i = command
                 while (
                     i > 0
                     and (
-                        new_coordinates := [
-                            coordinates[0] + vector[0],
-                            coordinates[1] + vector[1],
+                        new_point := [
+                            point[0] + direction[0],
+                            point[1] + direction[1],
                         ]
                     )
                     not in obstacles
                 ):
-                    coordinates = new_coordinates
+                    point = new_point
                     i -= 1
-                max_distance = max(max_distance, sum(x * x for x in coordinates))
+
+                max_distance = max(max_distance, sum(x * x for x in point))
         return max_distance
 
 
