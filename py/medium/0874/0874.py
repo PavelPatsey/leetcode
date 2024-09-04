@@ -2,37 +2,22 @@ from typing import List
 
 
 class Solution:
-    DIRECTIONS = ((0, 1), (1, 0), (0, -1), (-1, 0))
-
-    @staticmethod
-    def change_index(index, command):
-        new_index = index - 1 if command == -2 else index + 1
-        return new_index % 4
-
     def robotSim(self, commands: List[int], obstacles: List[List[int]]) -> int:
         obstacles_set = set(map(tuple, obstacles))
-        index = 0
-        point = (0, 0)
+        x, y = 0, 0
+        dx, dy = 0, 1
         max_distance = 0
         for command in commands:
-            if command in {-1, -2}:
-                index = self.change_index(index, command)
+            if command == -2:
+                dx, dy = -dy, dx
+            elif command == -1:
+                dx, dy = dy, -dx
             else:
-                direction = self.DIRECTIONS[index]
                 i = command
-                while (
-                    i > 0
-                    and (
-                        new_coordinates := (
-                            point[0] + direction[0],
-                            point[1] + direction[1],
-                        )
-                    )
-                    not in obstacles_set
-                ):
-                    point = new_coordinates
+                while i > 0 and (new_point := (x + dx, y + dy)) not in obstacles_set:
+                    x, y = new_point
                     i -= 1
-                max_distance = max(max_distance, sum(x * x for x in point))
+                max_distance = max(max_distance, x * x + y * y)
         return max_distance
 
 
