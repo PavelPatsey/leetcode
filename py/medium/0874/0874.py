@@ -12,17 +12,27 @@ class Solution:
     def robotSim(self, commands: List[int], obstacles: List[List[int]]) -> int:
         index = 0
         coordinates = [0, 0]
+        max_distance = 0
         for command in commands:
             if command in {-1, -2}:
                 index = self.change_index(index, command)
             else:
                 vector = self.VECTORS[index]
-                coordinates = [
-                    coordinates[0] + vector[0] * command,
-                    coordinates[1] + vector[1] * command,
-                ]
-                print(coordinates)
-        return sum(x * x for x in coordinates)
+                i = command
+                while (
+                    i > 0
+                    and (
+                        new_coordinates := [
+                            coordinates[0] + vector[0],
+                            coordinates[1] + vector[1],
+                        ]
+                    )
+                    not in obstacles
+                ):
+                    coordinates = new_coordinates
+                    i -= 1
+                max_distance = max(max_distance, sum(x * x for x in coordinates))
+        return max_distance
 
 
 solution = Solution()
@@ -37,3 +47,5 @@ assert solution.change_index(2, -2) == 1
 assert solution.change_index(3, -2) == 2
 
 assert solution.robotSim([4, -1, 3], []) == 25
+assert solution.robotSim([4, -1, 4, -2, 4], [[2, 4]]) == 65
+assert solution.robotSim([6, -1, -1, 6], []) == 36
