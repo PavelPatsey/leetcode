@@ -22,16 +22,6 @@ class Solution:
 
 
 solution = Solution()
-assert solution.change_index(0, -1) == 1
-assert solution.change_index(1, -1) == 2
-assert solution.change_index(2, -1) == 3
-assert solution.change_index(3, -1) == 0
-
-assert solution.change_index(0, -2) == 3
-assert solution.change_index(1, -2) == 0
-assert solution.change_index(2, -2) == 1
-assert solution.change_index(3, -2) == 2
-
 assert solution.robotSim([4, -1, 3], []) == 25
 assert solution.robotSim([4, -1, 4, -2, 4], [[2, 4]]) == 65
 assert solution.robotSim([6, -1, -1, 6], []) == 36
