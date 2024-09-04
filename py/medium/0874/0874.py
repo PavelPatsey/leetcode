@@ -16,17 +16,22 @@ class Solution:
         direction: Tuple[int],
         obstacles: List[List[int]],
     ) -> List[int]:
-        if direction in {(1, 0), (-1, 0)}:
-            i, j = 0, 1
-        else:
-            i, j = 1, 0
+        def _is_between(x0, x1, x2):
+            left, right = sorted([x0, x2])
+            return left <= x1 <= right
+
+        def get_distance(x0, x1):
+            return abs(x0 - x1)
+
+        j, i = abs(direction[0]), abs(direction[1])
         ds = direction[i] * command
         min_ds = abs(ds)
         for obstacle in obstacles:
-            if obstacle[j] == point[j] and point[i] <= obstacle[i] <= point[i] + ds:
-                min_ds = min(ds, abs(obstacle[i] - direction[i]))
+            if obstacle[j] == point[j] and _is_between(
+                point[i], obstacle[i], point[i] + ds
+            ):
+                min_ds = min(min_ds, get_distance(obstacle[i] - direction[i], point[i]))
         point[i] += min_ds * direction[i]
-
         return point
 
     def robotSim(self, commands: List[int], obstacles: List[List[int]]) -> int:
@@ -57,21 +62,18 @@ assert solution.change_index(3, -2) == 2
 assert solution.robotSim([4, -1, 3], []) == 25
 assert solution.robotSim([4, -1, 4, -2, 4], [[2, 4]]) == 65
 assert solution.robotSim([6, -1, -1, 6], []) == 36
-assert (
-    solution.robotSim(
-        [7, -2, -2, 7, 5],
-        [
-            [-3, 2],
-            [-2, 1],
-            [0, 1],
-            [-2, 4],
-            [-1, 0],
-            [-2, -3],
-            [0, -3],
-            [4, 4],
-            [-3, 3],
-            [2, 2],
-        ],
-    )
-    == 4
-)
+
+test_commands = [7, -2, -2, 7, 5]
+test_obstacles = [
+    [-3, 2],
+    [-2, 1],
+    [0, 1],
+    [-2, 4],
+    [-1, 0],
+    [-2, -3],
+    [0, -3],
+    [4, 4],
+    [-3, 3],
+    [2, 2],
+]
+assert solution.robotSim(test_commands, test_obstacles) == 4
