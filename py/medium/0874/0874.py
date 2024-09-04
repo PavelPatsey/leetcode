@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List
 
 
 class Solution:
@@ -9,41 +9,29 @@ class Solution:
         new_index = index - 1 if command == -2 else index + 1
         return new_index % 4
 
-    @staticmethod
-    def transform_point(
-        point: List[int],
-        command: int,
-        direction: Tuple[int],
-        obstacles: List[List[int]],
-    ) -> List[int]:
-        def _is_between(x0, x1, x2):
-            left, right = sorted([x0, x2])
-            return left <= x1 <= right
-
-        def get_distance(x0, x1):
-            return abs(x0 - x1)
-
-        j, i = abs(direction[0]), abs(direction[1])
-        ds = direction[i] * command
-        min_ds = abs(ds)
-        for obstacle in obstacles:
-            if obstacle[j] == point[j] and _is_between(
-                point[i], obstacle[i], point[i] + ds
-            ):
-                min_ds = min(min_ds, get_distance(obstacle[i] - direction[i], point[i]))
-        point[i] += min_ds * direction[i]
-        return point
-
     def robotSim(self, commands: List[int], obstacles: List[List[int]]) -> int:
+        obstacles_set = set(map(tuple, obstacles))
         index = 0
-        point = [0, 0]
+        point = (0, 0)
         max_distance = 0
         for command in commands:
             if command in {-1, -2}:
                 index = self.change_index(index, command)
             else:
                 direction = self.DIRECTIONS[index]
-                point = self.transform_point(point, command, direction, obstacles)
+                i = command
+                while (
+                    i > 0
+                    and (
+                        new_coordinates := (
+                            point[0] + direction[0],
+                            point[1] + direction[1],
+                        )
+                    )
+                    not in obstacles_set
+                ):
+                    point = new_coordinates
+                    i -= 1
                 max_distance = max(max_distance, sum(x * x for x in point))
         return max_distance
 
