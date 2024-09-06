@@ -4,22 +4,13 @@ from typing import List
 class Solution:
     def missingRolls(self, rolls: List[int], mean: int, n: int) -> List[int]:
         sum_rolls_n = mean * (len(rolls) + n) - sum(rolls)
-        rolls_n = [1] * n
-        current_sum = sum(rolls_n)
         if sum_rolls_n > n * 6 or sum_rolls_n < n:
             return []
-        x = sum_rolls_n - current_sum
-        i = 0
-        while x > 0:
-            if x > 5:
-                dx = 5
-            else:
-                dx = x
-            x -= dx
-            current_sum += dx
-            rolls_n[i] += dx
-            i += 1
-        return rolls_n
+        quotient, remainder = divmod(sum_rolls_n, n)
+        result = [quotient] * n
+        for i in range(remainder):
+            result[i] += 1
+        return result
 
 
 solution = Solution()
