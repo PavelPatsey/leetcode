@@ -7,9 +7,7 @@ class Solution:
         if sum_rolls_n > n * 6 or sum_rolls_n < n:
             return []
         quotient, remainder = divmod(sum_rolls_n, n)
-        result = [quotient] * n
-        for i in range(remainder):
-            result[i] += 1
+        result = [quotient + 1 if i < remainder else quotient for i in range(n)]
         return result
 
 
