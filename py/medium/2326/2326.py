@@ -28,16 +28,16 @@ class Solution:
     def spiralMatrix(self, m: int, n: int, head: Optional[ListNode]) -> List[List[int]]:
         current_node = head
         matrix = [[-1 for _ in range(n)] for _ in range(m)]
-        seen_set = set()
+        visited = set()
         row, col = 0, 0
         dr, dc = 0, 1
         matrix[row][col] = current_node.val
         current_node = current_node.next
-        seen_set.add((row, col))
-        while len(seen_set) != m * n and current_node:
+        visited.add((row, col))
+        while len(visited) != m * n and current_node:
             new_row, new_col = row + dr, col + dc
             if (
-                (new_row, new_col) in seen_set
+                (new_row, new_col) in visited
                 or new_row in {-1, m}
                 or new_col in {-1, n}
             ):
@@ -45,7 +45,7 @@ class Solution:
             row, col = row + dr, col + dc
             matrix[row][col] = current_node.val
             current_node = current_node.next
-            seen_set.add((row, col))
+            visited.add((row, col))
         return matrix
 
 
