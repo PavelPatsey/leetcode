@@ -16,7 +16,7 @@ class ListNode:
         return result
 
 
-def _get_list_node(head: List) -> ListNode:
+def _convert_list(head: List) -> ListNode:
     node = current_node = ListNode(head[0])
     for value in head[1:]:
         current_node.next = ListNode(value)
@@ -52,9 +52,9 @@ class Solution:
 
 solution = Solution()
 
-test_head = [3, 0, 2, 6, 8, 1, 7, 9, 4, 2, 5, 5, 0]
-list_node = _get_list_node(test_head)
-assert list_node.traversal() == test_head
+test_list = [3, 0, 2, 6, 8, 1, 7, 9, 4, 2, 5, 5, 0]
+list_node = _convert_list(test_list)
+assert list_node.traversal() == test_list
 
 assert solution.spiralMatrix(3, 5, list_node) == [
     [3, 0, 2, 6, 8],
@@ -63,8 +63,8 @@ assert solution.spiralMatrix(3, 5, list_node) == [
 ]
 
 
-test_head = [0, 1, 2]
-list_node = _get_list_node(test_head)
-assert list_node.traversal() == test_head
+test_list = [0, 1, 2]
+list_node = _convert_list(test_list)
+assert list_node.traversal() == test_list
 
 assert solution.spiralMatrix(1, 4, list_node) == [[0, 1, 2, -1]]
