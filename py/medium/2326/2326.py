@@ -42,8 +42,7 @@ class Solution:
                 or new_col in {-1, n}
             ):
                 dr, dc = dc, -dr
-            row += dr
-            col += dc
+            row, col = row + dr, col + dc
             matrix[row][col] = current_node.val
             current_node = current_node.next
             seen_set.add((row, col))
