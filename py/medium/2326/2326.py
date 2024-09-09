@@ -26,7 +26,28 @@ def _get_list_node(head: List) -> ListNode:
 
 class Solution:
     def spiralMatrix(self, m: int, n: int, head: Optional[ListNode]) -> List[List[int]]:
-        pass
+        current_node = head
+        matrix = [[-1 for _ in range(n)] for _ in range(m)]
+        seen_set = set()
+        row, col = 0, 0
+        dr, dc = 0, 1
+        matrix[row][col] = current_node.val
+        current_node = current_node.next
+        seen_set.add((row, col))
+        while len(seen_set) != m * n and current_node:
+            new_row, new_col = row + dr, col + dc
+            if (
+                (new_row, new_col) in seen_set
+                or new_row in {-1, m}
+                or new_col in {-1, n}
+            ):
+                dr, dc = dc, -dr
+            row += dr
+            col += dc
+            matrix[row][col] = current_node.val
+            current_node = current_node.next
+            seen_set.add((row, col))
+        return matrix
 
 
 solution = Solution()
@@ -34,3 +55,16 @@ solution = Solution()
 test_head = [3, 0, 2, 6, 8, 1, 7, 9, 4, 2, 5, 5, 0]
 list_node = _get_list_node(test_head)
 assert list_node.traversal() == test_head
+
+assert solution.spiralMatrix(3, 5, list_node) == [
+    [3, 0, 2, 6, 8],
+    [5, 0, -1, -1, 1],
+    [5, 2, 4, 9, 7],
+]
+
+
+test_head = [0, 1, 2]
+list_node = _get_list_node(test_head)
+assert list_node.traversal() == test_head
+
+assert solution.spiralMatrix(1, 4, list_node) == [[0, 1, 2, -1]]
