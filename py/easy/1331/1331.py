@@ -3,8 +3,7 @@ from typing import List
 
 class Solution:
     def arrayRankTransform(self, arr: List[int]) -> List[int]:
-        sorted_list = sorted(list(set(arr)))
-        rank_dict = {value: key + 1 for key, value in enumerate(sorted_list)}
+        rank_dict = {value: key + 1 for key, value in enumerate(sorted(set(arr)))}
         return [rank_dict[x] for x in arr]
 
 
