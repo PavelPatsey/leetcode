@@ -26,7 +26,9 @@ class Solution:
         while chars[0][0] != 0:
             char = heapq.heappop(chars)
             char_number, char_name = char
-            if char_number <= -2:
+            if prev_char[0] <= char_number <= -2:
+                n = 1
+            elif char_number <= -2 and char_number < prev_char[0]:
                 n = 2
             elif char_number == -1:
                 n = 1
@@ -36,10 +38,10 @@ class Solution:
             char_number += n
             string += char_name * n
             prev_char = (char_number, char_name)
-
         return string
 
 
 solution = Solution()
 assert solution.longestDiverseString(1, 1, 7) == "ccaccbcc"
 assert solution.longestDiverseString(7, 1, 0) == "aabaa"
+assert sorted(solution.longestDiverseString(0, 8, 11)) == sorted("ccbccbbccbbccbbccbc")
