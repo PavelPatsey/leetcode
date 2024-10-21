@@ -3,19 +3,19 @@ from typing import List
 
 class Solution:
     def maxUniqueSplit(self, s: str) -> int:
-        result_list = []
+        self.result = 0
 
         def dfs(stack: List, i: int):
             if i == len(s):
                 if len(stack) == len(set(stack)):
-                    result_list.append(len(stack))
+                    self.result = max(self.result, len(stack))
                 return
             last_item = stack.pop()
             dfs(stack + [last_item, s[i]], i + 1)
             dfs(stack + [last_item + s[i]], i + 1)
 
         dfs([s[0]], 1)
-        return max(result_list)
+        return self.result
 
 
 solution = Solution()
