@@ -7,17 +7,14 @@ class Solution:
 
         def dfs(stack: List, i: int):
             if i == len(s):
-                print(stack)
-                result_list.append(len(stack))
-                return stack
+                if len(stack) == len(set(stack)):
+                    result_list.append(len(stack))
+                return
             last_item = stack.pop()
-            if s[i] not in stack and s[i] != last_item:
-                dfs(stack + [last_item, s[i]], i + 1)
-            elif last_item + s[i] not in stack:
-                dfs(stack + [last_item + s[i]], i + 1)
+            dfs(stack + [last_item, s[i]], i + 1)
+            dfs(stack + [last_item + s[i]], i + 1)
 
         dfs([s[0]], 1)
-        print(result_list)
         return max(result_list)
 
 
