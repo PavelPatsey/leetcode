@@ -8,13 +8,12 @@ class Solution:
 
     def canSortArray(self, nums: List[int]) -> bool:
         N = len(nums)
+        bit_nums = list(map(lambda x: (x, self._set_bits_number(x)), nums))
         for i in range(N - 1):
             for j in range(N - 1 - i):
-                if nums[j] > nums[j + 1]:
-                    if self._set_bits_number(nums[j]) == self._set_bits_number(
-                        nums[j + 1]
-                    ):
-                        nums[j], nums[j + 1] = nums[j + 1], nums[j]
+                if bit_nums[j][0] > bit_nums[j + 1][0]:
+                    if bit_nums[j][1] == bit_nums[j + 1][1]:
+                        bit_nums[j], bit_nums[j + 1] = bit_nums[j + 1], bit_nums[j]
                     else:
                         return False
         return True
