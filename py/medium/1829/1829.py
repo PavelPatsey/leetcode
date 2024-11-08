@@ -11,20 +11,19 @@ class Solution:
         return max_xor
 
     def getMaximumXor(self, nums: List[int], maximumBit: int) -> List[int]:
-        xor_list = [nums[0]]
         prev = nums[0]
+        result = [self.get_max_xor(prev, maximumBit)]
         for num in nums[1:]:
             prev = prev ^ num
-            xor_list.append(prev)
+            result.append(self.get_max_xor(prev, maximumBit))
 
-        return list(map(lambda x: self.get_max_xor(x, maximumBit), xor_list[::-1]))
+        return result[::-1]
 
 
 solution = Solution()
 assert solution.get_max_xor(3, 5) == 28
 assert solution.get_max_xor(3, 2) == 0
 assert solution.get_max_xor(2, 2) == 1
-
 
 
 assert solution.getMaximumXor([0, 1, 1, 3], 2) == [0, 3, 2, 3]
