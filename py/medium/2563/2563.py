@@ -3,14 +3,12 @@ from typing import List
 
 class Solution:
     def countFairPairs(self, nums: List[int], lower: int, upper: int) -> int:
-        sorted_nums = sorted(set(nums))
-        n = len(nums)
-        counter = 0
-        for i in range(n):
-            for j in range(i, n):
-                if 0 <= i < j < n and lower <= nums[i] + nums[j] <= upper:
-                    counter += 1
-        return counter
+        return sum(
+            True
+            for i, nums_i in enumerate(nums)
+            for j, nums_j in enumerate(nums[i + 1 :])
+            if lower <= nums_i + nums_j <= upper
+        )
 
 
 solution = Solution()
