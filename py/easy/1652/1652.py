@@ -7,15 +7,14 @@ class Solution:
         if k == 0:
             return [0] * N
         elif k > 0:
-            ext_code = code + code
-            result = [sum(ext_code[i + 1 : i + k + 1]) for i in range(N)]
+            array = code + code
+            n = k
+            start, end, step = 0, N, 1
         else:
-            rev_ext_code = (code + code)[::-1]
-            k = -k
-            result = [
-                sum(rev_ext_code[i + 1 : i + k + 1]) for i in range(N - 1, -1, -1)
-            ]
-        return result
+            array = (code + code)[::-1]
+            n = -k
+            start, end, step = N - 1, -1, -1
+        return [sum(array[i + 1 : i + n + 1]) for i in range(start, end, step)]
 
 
 solution = Solution()
