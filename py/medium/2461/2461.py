@@ -6,13 +6,15 @@ class Solution:
     def maximumSubarraySum(self, nums: List[int], k: int) -> int:
         subarray = deque(nums[0:k])
         result = sum(subarray) if len(subarray) == len(set(subarray)) else 0
+        current_sum = sum(subarray)
 
         for i in range(1, len(nums) - k + 1):
-            subarray.popleft()
+            current_sum -= subarray.popleft()
             subarray.append(nums[i + k - 1])
+            current_sum += nums[i + k - 1]
             result = max(
                 result,
-                sum(subarray) if len(subarray) == len(set(subarray)) else 0,
+                current_sum if len(subarray) == len(set(subarray)) else 0,
             )
         return result
 
