@@ -17,7 +17,8 @@ class Solution:
             for_add = nums[i + k - 1]
             counter[for_add] += 1
             current_sum += for_add
-            result = max(result, current_sum if len(counter.keys()) == k else 0)
+            if len(counter) == k:
+                result = max(result, current_sum)
         return result
 
 
