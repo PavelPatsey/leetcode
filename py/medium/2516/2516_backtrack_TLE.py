@@ -10,7 +10,7 @@ class Solution:
 
         visited = {}
 
-        def dfs(left, right, counter: Dict, number: int):
+        def backtrack(left, right, counter: Dict, number: int):
             if (left, right) in visited:
                 return visited[(left, right)]
 
@@ -19,13 +19,25 @@ class Solution:
                 return number
             if left > right:
                 return float("+inf")
-            a = dfs(left + 1, right, updated_counter(counter, s[left]), number + 1)
-            b = dfs(left, right - 1, updated_counter(counter, s[right]), number + 1)
-            visited[(left + 1, right)] = a
-            visited[(left, right - 1)] = b
+            a = backtrack(
+                left + 1,
+                right,
+                updated_counter(counter, s[left]),
+                number + 1,
+            )
+            b = backtrack(
+                left,
+                right - 1,
+                updated_counter(counter, s[right]),
+                number + 1,
+            )
+            if (left + 1, right) not in visited:
+                visited[(left + 1, right)] = a
+            if (left, right - 1) not in visited:
+                visited[(left, right - 1)] = b
             return min(a, b)
 
-        res = dfs(0, len(s) - 1, {"a": 0, "b": 0, "c": 0}, 0)
+        res = backtrack(0, len(s) - 1, {"a": 0, "b": 0, "c": 0}, 0)
         print(f"{res=}")
         return res if res != float("+inf") else -1
 
