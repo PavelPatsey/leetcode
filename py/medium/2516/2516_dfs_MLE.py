@@ -8,28 +8,29 @@ class Solution:
             c[char] += 1
             return c
 
-        def dfs(string, counter: Dict, number: int):
+        def dfs(left, right, counter: Dict, number: int):
+            print(f"{left=}, {right=}, {counter=}, {number=}")
             if all(value >= k for value in counter.values()):
                 return number
-            if not string:
+            if left > right:
                 return float("+inf")
-            N = len(string)
-            # print(f"{string=}, {counter=}, {number=}, {N=}")
             return min(
                 dfs(
-                    string[1:N],
-                    updated_counter(counter, string[0]),
+                    left + 1,
+                    right,
+                    updated_counter(counter, s[left]),
                     number + 1,
                 ),
                 dfs(
-                    string[0 : N - 1],
-                    updated_counter(counter, string[N - 1]),
+                    left,
+                    right - 1,
+                    updated_counter(counter, s[right]),
                     number + 1,
                 ),
             )
 
-        res = dfs(s, {"a": 0, "b": 0, "c": 0}, 0)
-        # print(f"{res=}")
+        res = dfs(0, len(s) - 1, {"a": 0, "b": 0, "c": 0}, 0)
+        print(f"{res=}")
         return res if res != float("+inf") else -1
 
 
