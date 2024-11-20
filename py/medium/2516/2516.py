@@ -8,22 +8,26 @@ class Solution:
             c[char] += 1
             return c
 
-        visited = {}
-
         def dfs(left, right, counter: Dict, number: int):
-            if (left, right) in visited:
-                return visited[(left, right)]
-
             print(f"{left=}, {right=}, {counter=}, {number=}")
             if all(value >= k for value in counter.values()):
                 return number
             if left > right:
                 return float("+inf")
-            a = dfs(left + 1, right, updated_counter(counter, s[left]), number + 1)
-            b = dfs(left, right - 1, updated_counter(counter, s[right]), number + 1)
-            visited[(left + 1, right)] = a
-            visited[(left, right - 1)] = b
-            return min(a, b)
+            return min(
+                dfs(
+                    left + 1,
+                    right,
+                    updated_counter(counter, s[left]),
+                    number + 1,
+                ),
+                dfs(
+                    left,
+                    right - 1,
+                    updated_counter(counter, s[right]),
+                    number + 1,
+                ),
+            )
 
         res = dfs(0, len(s) - 1, {"a": 0, "b": 0, "c": 0}, 0)
         print(f"{res=}")
