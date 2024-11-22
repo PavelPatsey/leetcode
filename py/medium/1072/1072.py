@@ -6,7 +6,7 @@ class Solution:
     def maxEqualRowsAfterFlips(self, matrix: List[List[int]]) -> int:
         counter = Counter()
         for row in matrix:
-            pattern = tuple(x == row[0] for x in row)
+            pattern = tuple(row) if row[0] == 0 else tuple(x ^ 1 for x in row)
             counter[pattern] += 1
         return max(counter.values())
 
