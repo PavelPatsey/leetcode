@@ -8,26 +8,36 @@ class Solution:
         return count
 
     def minimizeXor(self, num1: int, num2: int) -> int:
-        bits_count = self.bits_count(num2)
-        print()
-        print(f"{bits_count=}")
-        min_tuple = float("inf"), float("inf")
-        max_num = (1 << bits_count) - 1
-        max_num = max_num << len(bin(num1)[2:])
-        max_num += 1
-        print(f"{max_num=} {bin(max_num)=}")
-        for x in range(max_num):
-            if self.bits_count(x) == bits_count:
-                y = (min_tuple, (x, x ^ num1))
-                min_tuple = min(y, key=lambda x: x[1])
-        print(f"{min_tuple=}")
-        x = min_tuple[0]
-        print(f"{x=}")
-        return x
+        count_1 = self.bits_count(num1)
+        count_2 = self.bits_count(num2)
+        if count_1 == count_2:
+            return num1
+        elif count_1 > count_2:
+            bin_x = ""
+            for b in bin(num1)[2:]:
+                if b == "1" and count_2 > 0:
+                    bin_x += "1"
+                    count_2 -= 1
+                else:
+                    bin_x += "0"
+            return int(bin_x, 2)
+        else:
+            bin_x = ""
+            count = count_2 - count_1
+            for b in reversed(bin(num1)[2:]):
+                if b == "0" and count > 0:
+                    bin_x += "1"
+                    count -= 1
+                else:
+                    bin_x += b
+            bin_x = bin_x[::-1]
+            bin_x = "1" * count + bin_x
+            return int(bin_x, 2)
 
 
 solution = Solution()
 assert solution.minimizeXor(3, 5) == 3
+assert solution.minimizeXor(41, 3) == 40
 assert solution.minimizeXor(1, 12) == 3
 assert solution.minimizeXor(25, 72) == 24
-assert solution.minimizeXor(3756, 7038) == 3775
+assert solution.minimizeXor(65, 84) == 67
