@@ -1,13 +1,10 @@
 class Solution:
     def areAlmostEqual(self, s1: str, s2: str) -> bool:
-        lst = []
-        for i, (a, b) in enumerate(zip(s1, s2)):
-            if a != b:
-                lst.append(i)
-        if len(lst) == 0:
+        diff = [i for i, (a, b) in enumerate(zip(s1, s2)) if a != b]
+        if len(diff) == 0:
             return True
-        elif len(lst) == 2:
-            i, j = lst
+        elif len(diff) == 2:
+            i, j = diff
             return s1[i] == s2[j] and s1[j] == s2[i]
         else:
             return False
