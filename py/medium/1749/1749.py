@@ -1,16 +1,11 @@
+from itertools import accumulate
 from typing import List
 
 
 class Solution:
     def maxAbsoluteSum(self, nums: List[int]) -> int:
-        s = 0
-        mx = 0
-        mn = 0
-        for n in nums:
-            s += n
-            mx = max(s, mx)
-            mn = min(s, mn)
-        return mx - mn
+        s = list(accumulate(nums, initial=0))
+        return max(s) - min(s)
 
 
 solution = Solution()
