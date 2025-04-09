@@ -1,13 +1,12 @@
 class Solution:
     def minOperations(self, nums: list[int], k: int) -> int:
-        nums_set = set(nums)
-        result = 0
-        for x in nums_set:
+        nums_set = set()
+        for x in nums:
             if x > k:
-                result += 1
+                nums_set.add(x)
             elif x < k:
                 return -1
-        return result
+        return len(nums_set)
 
 
 solution = Solution()
