@@ -1,10 +1,9 @@
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
-        rev_prices = prices[::-1]
-        max_x = rev_prices[0]
+        max_x = prices[-1]
         diff = 0
         res = diff
-        for x in rev_prices:
+        for x in reversed(prices):
             if x > max_x:
                 max_x = x
                 diff = 0
