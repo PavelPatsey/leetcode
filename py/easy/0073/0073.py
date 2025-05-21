@@ -5,12 +5,12 @@ class Solution:
         """
         rows, cols = set(), set()
         for r, row in enumerate(matrix):
-            for c, item in enumerate(row):
-                if item == 0:
+            for c, num in enumerate(row):
+                if num == 0:
                     rows.add(r)
                     cols.add(c)
-        for r, _ in enumerate(matrix):
-            for c, _ in enumerate(row):
+        for r in range(len(matrix)):
+            for c in range(len(matrix[0])):
                 if r in rows or c in cols:
                     matrix[r][c] = 0
 
