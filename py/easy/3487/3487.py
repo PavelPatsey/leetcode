@@ -1,13 +1,13 @@
 class Solution:
     def maxSum(self, nums: list[int]) -> int:
-        non_neg_nums = set()
+        positive_nums = set()
         max_num = nums[0]
         for x in nums:
             if x > max_num:
                 max_num = x
             if x > 0:
-                non_neg_nums.add(x)
-        return sum(non_neg_nums) if non_neg_nums else max_num
+                positive_nums.add(x)
+        return sum(positive_nums) if positive_nums else max_num
 
 
 solution = Solution()
