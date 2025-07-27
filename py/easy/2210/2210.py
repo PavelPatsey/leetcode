@@ -12,7 +12,8 @@ class Solution:
     def countHillValley(self, nums: list[int]) -> int:
         removed = self.remove_duplicates(nums)
         counter = 0
-        for x, y, z in zip(removed, removed[1:], removed[2:]):
+        for i in range(0, len(removed) - 2):
+            x, y, z = removed[i], removed[i + 1], removed[i + 2]
             if x < y > z or x > y < z:
                 counter += 1
         return counter
