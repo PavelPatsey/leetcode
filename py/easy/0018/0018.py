@@ -2,8 +2,8 @@ class Solution:
     def generate(self, numRows: int) -> list[list[int]]:
         res = [[1]]
         for _ in range(numRows - 1):
-            last = res[-1]
-            row = [last[0]] + [x + y for x, y in zip(last, last[1:])] + [last[-1]]
+            blank = [0] + res[-1] + [0]
+            row = [x + y for x, y in zip(blank, blank[1:])]
             res.append(row)
         return res
 
