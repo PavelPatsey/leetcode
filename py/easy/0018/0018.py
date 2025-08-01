@@ -1,14 +1,10 @@
 class Solution:
     def generate(self, numRows: int) -> list[list[int]]:
-        if numRows == 1:
-            return [[1]]
-        elif numRows == 2:
-            return [[1], [1, 1]]
-        res = [[1], [1, 1]]
-        for i in range(2, numRows):
+        res = [[1]]
+        for _ in range(numRows - 1):
             last = res[-1]
-            item = [last[0]] + [x + y for x, y in zip(last, last[1:])] + [last[-1]]
-            res.append(item)
+            row = [last[0]] + [x + y for x, y in zip(last, last[1:])] + [last[-1]]
+            res.append(row)
         return res
 
 
