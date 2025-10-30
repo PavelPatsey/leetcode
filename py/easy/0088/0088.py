@@ -1,26 +1,23 @@
 class Solution:
-    @staticmethod
-    def _merge_two_sorted_nums(nums1, nums2):
-        lst = []
-        i = j = 0
-        while i < len(nums1) and j < len(nums2):
-            if nums1[i] < nums2[j]:
-                lst.append(nums1[i])
-                i += 1
-            else:
-                lst.append(nums2[j])
-                j += 1
-        lst.extend(nums1[i:])
-        lst.extend(nums2[j:])
-        return lst
-
     def merge(self, nums1: list[int], m: int, nums2: list[int], n: int) -> None:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        merged_list = self._merge_two_sorted_nums(nums1[:m], nums2)
-        for i, n in enumerate(merged_list):
-            nums1[i] = n
+        i = m - 1
+        j = n - 1
+        k = m + n - 1
+        while i >= 0 and j >= 0:
+            if nums1[i] > nums2[j]:
+                nums1[k] = nums1[i]
+                i -= 1
+            else:
+                nums1[k] = nums2[j]
+                j -= 1
+            k -= 1
+        while j >= 0:
+            nums1[k] = nums2[j]
+            j -= 1
+            k -= 1
 
 
 solution = Solution()
