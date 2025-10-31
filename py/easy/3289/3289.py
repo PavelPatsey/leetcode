@@ -3,10 +3,10 @@ class Solution:
         res = []
         visited = set()
         for x in nums:
-            if x not in visited:
-                visited.add(x)
-            else:
+            if x in visited:
                 res.append(x)
+            else:
+                visited.add(x)
         return res
 
 
