@@ -7,7 +7,6 @@ class Solution:
             right = i + k - 1
             new_sum = new_sum + nums[right] - nums[left - 1]
             max_sum = max(max_sum, new_sum)
-            print(nums[left], nums[right])
             i += 1
         return max_sum / k
 
