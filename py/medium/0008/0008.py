@@ -3,42 +3,33 @@ MAX_INT = 2**31 - 1
 
 
 class Solution:
-    @staticmethod
-    def is_number(char: str):
-        return ord("0") <= ord(char) <= ord("9")
-
     def myAtoi(self, s: str) -> int:
-        string = s
         i = 0
-        if len(string) == 0:
+        if len(s) == 0:
             return 0
-        if i >= len(string):
+        if i == len(s):
             return 0
-        if string[i] == " ":
-            while i < len(string) and string[i] == " ":
-                i += 1
-        if i >= len(string):
+        while i < len(s) and s[i] == " ":
+            i += 1
+        if i >= len(s):
             return 0
         sign = "+"
-        if string[i] in {"+", "-"}:
-            sign = string[i]
+        if s[i] in "+-":
+            sign = s[i]
             i += 1
-        if i >= len(string):
+        sign = 1 if sign == "+" else -1
+        num_str = ""
+        while i < len(s) and s[i].isdigit():
+            num_str += s[i]
+            i += 1
+        if not num_str:
             return 0
-        if self.is_number(string[i]):
-            num_list = []
-            while i < len(string) and self.is_number(string[i]):
-                num_list.append(string[i])
-                i += 1
-            num_str = sign + "".join(num_list)
-            num = int(num_str)
-            if num < MIN_INT:
-                return MIN_INT
-            elif num > MAX_INT:
-                return MAX_INT
-            else:
-                return num
-        return 0
+        num = sign * int(num_str)
+        if num < MIN_INT:
+            return MIN_INT
+        elif num > MAX_INT:
+            return MAX_INT
+        return num
 
 
 solution = Solution()
@@ -50,3 +41,4 @@ assert solution.myAtoi("words and 987") == 0
 assert solution.myAtoi("-91283472332") == -2147483648
 assert solution.myAtoi("") == 0
 assert solution.myAtoi(" ") == 0
+assert solution.myAtoi("21474836460") == 2147483647
