@@ -17,11 +17,9 @@ class ListNode:
     @classmethod
     def create_from_nums(cls, nums: list[int]) -> Self | None:
         """Create a linked list head from a list of numbers"""
-        prev_node = None
         curr_node = None
         for x in reversed(nums):
-            curr_node = ListNode(x, prev_node)
-            prev_node = curr_node
+            curr_node = ListNode(x, curr_node)
         return curr_node
 
 
