@@ -2,18 +2,15 @@ from collections import defaultdict
 
 
 class Solution:
-    @staticmethod
-    def is_valid_window(k: int, counter: defaultdict):
-        replaces = sum(counter.values()) - max(counter.values())
-        return replaces <= k
-
     def characterReplacement(self, s: str, k: int) -> int:
         result = 0
         l = r = 0
         counter = defaultdict(int)
         counter[s[r]] += 1
         while r < len(s):
-            if self.is_valid_window(k, counter):
+            replaces = r - l + 1 - max(counter.values())
+            valid_window = replaces <= k
+            if valid_window:
                 result = max(r - l + 1, result)
                 r += 1
                 if r < len(s):
