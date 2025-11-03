@@ -1,47 +1,26 @@
-from typing import List
-
-
 class Solution:
-    def minCost(self, colors: str, neededTime: List[int]) -> int:
-        total_time = 0
+    def minCost(self, colors: str, neededTime: list[int]) -> int:
+        res = 0
         i = 0
-        j = 0
-        len_list = len(neededTime)
-
-        while i < len_list and j < len_list:
-            delta_time = 0
-            max_time = 0
-
-            while j < len_list and colors[i] == colors[j]:
-                delta_time += neededTime[j]
-                max_time = max(max_time, neededTime[j])
+        while i < len(colors):
+            j = 1
+            dt = 0
+            min_t = neededTime[i]
+            while i + j < len(colors) and colors[i] == colors[i + j]:
+                if neededTime[i + j] < min_t:
+                    dt += neededTime[i + j]
+                else:
+                    dt += min_t
+                    min_t = neededTime[i + j]
                 j += 1
-
-            delta_time -= max_time
-            total_time += delta_time
-            i = j
-
-        return total_time
+            res += dt
+            i += j
+        return res
 
 
 solution = Solution()
-
-colors = "abaac"
-neededTime = [1, 2, 3, 4, 5]
-assert solution.minCost(colors, neededTime) == 3
-
-colors = "abc"
-neededTime = [1, 2, 3]
-assert solution.minCost(colors, neededTime) == 0
-
-colors = "aabaa"
-neededTime = [1, 2, 3, 4, 1]
-assert solution.minCost(colors, neededTime) == 2
-
-colors = "abbbbba"
-neededTime = [1, 2, 3, 4, 5, 6, 7]
-assert solution.minCost(colors, neededTime) == 14
-
-colors = "aaabbbabbbb"
-neededTime = [3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1]
-assert solution.minCost(colors, neededTime) == 26
+assert solution.minCost("abaac", [1, 2, 3, 4, 5]) == 3
+assert solution.minCost("abc", [1, 2, 3]) == 0
+assert solution.minCost("aabaa", [1, 2, 3, 4, 1]) == 2
+assert solution.minCost("abbbbba", [1, 2, 3, 4, 5, 6, 7]) == 14
+assert solution.minCost("aaabbbabbbb", [3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1]) == 26
