@@ -1,5 +1,6 @@
 from collections import Counter
 from math import prod
+from operator import itemgetter
 
 
 class Solution:
@@ -13,7 +14,7 @@ class Solution:
 def xsum(nums: list, x: int) -> int:
     counter = Counter(nums)
     items = list(counter.items())
-    sorted_mapped = sorted(items, key=lambda x: (x[1], x[0]), reverse=True)
+    sorted_mapped = sorted(items, key=itemgetter(1, 0), reverse=True)
     return sum(prod(n) for n in sorted_mapped[0:x])
 
 
