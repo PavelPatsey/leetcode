@@ -1,24 +1,21 @@
 class Solution:
     def numberOfSubarrays(self, nums: list[int], k: int) -> int:
-        converted = [x % 2 for x in nums]
-        print(f"{converted=}")
+        converted = (x % 2 for x in nums)
         indexes = [i for i, x in enumerate(converted) if x == 1]
         res = 0
-        print(f"{indexes=}")
         l = 0
         r = k - 1
         while r < len(indexes):
             if l == 0:
-                before = indexes[0] + 1
+                left_variants_count = indexes[0] + 1
             else:
-                before = indexes[l] - indexes[l - 1]
+                left_variants_count = indexes[l] - indexes[l - 1]
 
             if r + 1 == len(indexes):
-                after = len(converted) - indexes[r]
+                right_variants_count = len(nums) - indexes[r]
             else:
-                after = indexes[r + 1] - indexes[r]
-            dr = before * after
-            res += dr
+                right_variants_count = indexes[r + 1] - indexes[r]
+            res += left_variants_count * right_variants_count
             l += 1
             r += 1
         return res
