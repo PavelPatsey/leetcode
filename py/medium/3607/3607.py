@@ -13,20 +13,23 @@ class Solution:
         traversals = make_traversals(c, graph)
         nodes_info = make_info(c, traversals)
         deleted_nodes = set()
+        statuses = [True] * (c + 1)
         res = []
         for command, node in queries:
             if command == 1:
-                if node not in deleted_nodes:
+                if statuses[node]:
                     res.append(node)
                 else:
                     traversal = traversals[nodes_info[node]]
                     min_node = traversal[0] if traversal else -1
                     res.append(min_node)
             else:
+                statuses[node] = False
                 deleted_nodes.add(node)
                 traversal = traversals[nodes_info[node]]
                 while traversal and traversal[0] in deleted_nodes:
-                    heapq.heappop(traversal)
+                    value = heapq.heappop(traversal)
+                    deleted_nodes.remove(value)
         # print(f"{res=}\n")
         return res
 
@@ -41,8 +44,7 @@ def make_traversals(c: int, graph: defaultdict) -> list:
             t = list(traversal)
             heapq.heapify(t)
             traversals.append(t)
-
-    print(f"{traversals=}")
+    # print(f"{traversals=}")
     return traversals
 
 
