@@ -28,7 +28,7 @@ class Solution:
                 nodes_info[node]["status"] = False
                 if node in traversal:
                     traversal.remove(node)
-        # print(f"{res=}")
+        # print(f"{res=}\n")
         return res
 
 
@@ -67,7 +67,7 @@ def make_info(c: int, traversals: list) -> dict:
             if node in traversal and nodes_info[node]["index"] is None:
                 nodes_info[node]["index"] = i
                 continue
-    # print(f"{nodes_info=}\n")
+    # print(f"{nodes_info=}")
     return nodes_info
 
 
