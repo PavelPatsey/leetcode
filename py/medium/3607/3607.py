@@ -10,8 +10,7 @@ class Solution:
         for u, v in connections:
             graph[u].add(v)
             graph[v].add(u)
-        traversals = make_traversals(c, graph)
-        nodes_info = make_info(c, traversals)
+        traversals, nodes_info = make_traversals_info(c, graph)
         deleted_nodes = set()
         statuses = [True] * (c + 1)
         res = []
@@ -30,22 +29,25 @@ class Solution:
                 while traversal and traversal[0] in deleted_nodes:
                     value = heapq.heappop(traversal)
                     deleted_nodes.remove(value)
-        # print(f"{res=}\n")
         return res
 
 
-def make_traversals(c: int, graph: defaultdict) -> list:
+def make_traversals_info(c: int, graph: defaultdict) -> tuple[list, dict]:
     traversals = []
     visited = set()
+    nodes_info = {}
+    i = 0
     for node in range(1, c + 1):
         if node not in visited:
             traversal = bfs(node, graph)
             visited.update(traversal)
-            t = list(traversal)
-            heapq.heapify(t)
-            traversals.append(t)
-    # print(f"{traversals=}")
-    return traversals
+            to_heap = list(traversal)
+            heapq.heapify(to_heap)
+            traversals.append(to_heap)
+            for visited_node in traversal:
+                nodes_info[visited_node] = i
+            i += 1
+    return traversals, nodes_info
 
 
 def bfs(node, matrix) -> set:
@@ -59,17 +61,6 @@ def bfs(node, matrix) -> set:
                 visited.add(child)
                 queue.append(child)
     return visited
-
-
-def make_info(c: int, traversals: list) -> dict:
-    nodes_info = {}
-    for node in range(1, c + 1):
-        for i, traversal in enumerate(traversals):
-            if node in traversal and nodes_info.get(node) is None:
-                nodes_info[node] = i
-                continue
-    # print(f"{nodes_info=}")
-    return nodes_info
 
 
 solution = Solution()
