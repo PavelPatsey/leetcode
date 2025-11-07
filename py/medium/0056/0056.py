@@ -4,16 +4,19 @@ from operator import itemgetter
 class Solution:
     def merge(self, intervals: list[list[int]]) -> list[list[int]]:
         vals = sorted(intervals, key=itemgetter(0, 1))
+        res = []
         i = 0
         while i < len(vals) - 1:
             a = vals[i]
             b = vals[i + 1]
             if is_intersect(a, b):
-                vals[i] = merge(a, b)
-                vals.pop(i + 1)
+                vals[i + 1] = merge(a, b)
             else:
-                i += 1
-        return vals
+                res.append(vals[i])
+            i += 1
+        if i == len(vals) - 1:
+            res.append(vals[i])
+        return res
 
 
 def is_intersect(a: list, b: list) -> bool:
