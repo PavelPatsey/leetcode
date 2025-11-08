@@ -4,27 +4,17 @@ from operator import itemgetter
 class Solution:
     def merge(self, intervals: list[list[int]]) -> list[list[int]]:
         vals = sorted(intervals, key=itemgetter(0, 1))
-        res = []
-        i = 0
-        while i < len(vals) - 1:
-            a = vals[i]
-            b = vals[i + 1]
-            if is_intersect(a, b):
-                vals[i + 1] = merge(a, b)
+        res = [vals[0]]
+        for val in vals:
+            if is_intersect(res[-1], val):
+                res[-1][1] = max(res[-1][1], val[1])
             else:
-                res.append(vals[i])
-            i += 1
-        if i == len(vals) - 1:
-            res.append(vals[i])
+                res.append(val)
         return res
 
 
 def is_intersect(a: list, b: list) -> bool:
     return a[1] >= b[0]
-
-
-def merge(a: list, b: list) -> list:
-    return [min(a[0], b[0]), max(a[1], b[1])]
 
 
 solution = Solution()
