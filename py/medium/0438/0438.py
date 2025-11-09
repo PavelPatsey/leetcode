@@ -4,8 +4,6 @@ from collections import Counter
 class Solution:
     def findAnagrams(self, s: str, p: str) -> list[int]:
         res = []
-        # if len(p) > len(s):
-        #     return res
         reference_counter = Counter(p)
         current_counter = Counter(s[0 : len(p) - 1])
         for i in range(len(s) - len(p) + 1):
