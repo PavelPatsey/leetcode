@@ -3,16 +3,16 @@ class Solution:
         res = 0
         left = 0
         right = sum(nums)
-        for i in range(len(nums)):
-            right -= nums[i]
-            if nums[i] == 0:
+        for x in nums:
+            right -= x
+            if x == 0:
                 if left == right:
                     res += 2
                 elif abs(left - right) == 1:
                     res += 1
                 else:
                     pass
-            left += nums[i]
+            left += x
         return res
 
 
