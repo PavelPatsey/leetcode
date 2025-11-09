@@ -1,16 +1,18 @@
 class Solution:
     def countValidSelections(self, nums: list[int]) -> int:
         res = 0
+        left = 0
+        right = sum(nums)
         for i in range(len(nums)):
+            right -= nums[i]
             if nums[i] == 0:
-                left = sum(nums[:i])
-                right = sum(nums[i + 1 :])
                 if left == right:
                     res += 2
                 elif abs(left - right) == 1:
                     res += 1
                 else:
                     pass
+            left += nums[i]
         return res
 
 
