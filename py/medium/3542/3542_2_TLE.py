@@ -3,22 +3,17 @@ from collections import deque
 
 class Solution:
     def minOperations(self, nums: list[int]) -> int:
-        res = min_operations(nums)
-        return res
-
-
-def min_operations(nums: list[int]) -> int:
-    acc = 0
-    splitted_nums = split_by_zero(nums)
-    queue = deque(splitted_nums)
-    while queue:
-        cur_slice = queue.popleft()
-        min_num = min(cur_slice)
-        new_slice = [0 if x == min_num else x for x in cur_slice]
-        acc += 1
-        for lst in split_by_zero(new_slice):
-            queue.append(lst)
-    return acc
+        acc = 0
+        splitted_nums = split_by_zero(nums)
+        queue = deque(splitted_nums)
+        while queue:
+            cur_slice = queue.popleft()
+            min_num = min(cur_slice)
+            new_slice = [0 if x == min_num else x for x in cur_slice]
+            acc += 1
+            for lst in split_by_zero(new_slice):
+                queue.append(lst)
+        return acc
 
 
 def split_by_zero(nums: list[int]) -> list[int]:
