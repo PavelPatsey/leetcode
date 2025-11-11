@@ -10,15 +10,10 @@ class Solution:
             b = secondlist[j]
             if is_intersect(a, b):
                 res.append(intersection(a, b))
-            if a[1] == b[1]:
+            if a[1] < b[1]:
                 i += 1
-                j += 1
-            elif a[1] < b[1]:
-                i += 1
-            elif a[1] > b[1]:
-                j += 1
             else:
-                assert False, "Invalid else case"
+                j += 1
         return res
 
 
