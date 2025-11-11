@@ -5,13 +5,12 @@ from collections import Counter
 class Solution:
     def topKFrequent(self, nums: list[int], k: int) -> list[int]:
         counter = Counter(nums)
-        h = [(-freq, n) for n, freq in counter.items()]
-        heapq.heapify(h)
-        res = []
-        for _ in range(k):
-            _, n = heapq.heappop(h)
-            res.append(n)
-        return res
+        heap = []
+        for n, freq in counter.items():
+            heapq.heappush(heap, (freq, n))
+            if len(heap) > k:
+                heapq.heappop(heap)
+        return [n for _f, n in heap]
 
 
 solution = Solution()
