@@ -1,15 +1,19 @@
+import heapq
+
+
 class Solution:
     def findKthLargest(self, nums: list[int], k: int) -> int:
         largest = []
+        heapq.heapify(largest)
         for n in nums:
             largest = add(n, k, largest)
-        return min(largest)
+        return largest[0]
 
 
 def add(n: int, k: int, largest: list[int]) -> list[int]:
-    largest.append(n)
+    heapq.heappush(largest, n)
     while len(largest) > k:
-        largest.remove(min(largest))
+        heapq.heappop(largest)
     return largest
 
 
