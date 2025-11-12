@@ -1,12 +1,11 @@
 class Solution:
     def shiftingLetters(self, s: str, shifts: list[int]) -> str:
         total = 0
-        res = ""
+        shifted = []
         for x, char in zip(reversed(shifts), reversed(s)):
             total += x
-            print(x, char, total)
-            res += shift(char, total)
-        return res[::-1]
+            shifted.append(shift(char, total))
+        return "".join(shifted[::-1])
 
 
 def shift(char: str, x: int) -> str:
