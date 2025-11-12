@@ -3,6 +3,14 @@ class ListNode:
         self.val = val
         self.next = next
 
+    def travers(self) -> list:
+        res = []
+        node = self
+        while node:
+            res.append(node.val)
+            node = node.next
+        return res
+
 
 class Solution:
     def reverseList(self, head: ListNode | None) -> ListNode | None:
@@ -34,4 +42,7 @@ node3 = ListNode(3, node2)
 node4 = ListNode(4, node3)
 reversed_head = ListNode(5, node4)
 
-solution.reverseList(original_head) == reversed_head
+assert original_head.travers() == [1, 2, 3, 4, 5]
+assert reversed_head.travers() == [5, 4, 3, 2, 1]
+expected_reversed_head = solution.reverseList(original_head)
+assert reversed_head.travers() == expected_reversed_head.travers()
