@@ -1,8 +1,6 @@
 class Solution:
     def permute(self, nums: list[int]) -> list[list[int]]:
-        res = make_permutations(nums)
-        print(f"{res=}")
-        return res
+        return make_permutations(nums)
 
 
 def make_permutations(nums: list[int]) -> list[list[int]]:
