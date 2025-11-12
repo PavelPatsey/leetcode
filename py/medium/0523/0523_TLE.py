@@ -10,8 +10,7 @@ def check_subarray_sum(l: int, r: int, cur_sum: int, nums: list[int], k: int) ->
         return True
     a = check_subarray_sum(l + 1, r, cur_sum - nums[l], nums, k)
     b = check_subarray_sum(l, r - 1, cur_sum - nums[r], nums, k)
-    c = check_subarray_sum(l + 1, r - 1, cur_sum - nums[l] - nums[r], nums, k)
-    return any((a, b, c))
+    return any((a, b))
 
 
 solution = Solution()
