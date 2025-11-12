@@ -1,20 +1,18 @@
 class Solution:
     def permute(self, nums: list[int]) -> list[list[int]]:
-        return make_permutations(nums)
+        res = []
 
+        def _make_permutations(permutation: list[int], remaining: list):
+            if len(permutation) == len(nums):
+                res.append(permutation)
+                return
+            for i, x in enumerate(remaining):
+                _make_permutations(
+                    permutation + [x], remaining[0:i] + remaining[i + 1 :]
+                )
 
-def make_permutations(nums: list[int]) -> list[list[int]]:
-    res = []
-
-    def _make_permutations(permutation: list[int], remaining: list):
-        if len(permutation) == len(nums):
-            res.append(permutation)
-            return
-        for i, x in enumerate(remaining):
-            _make_permutations(permutation + [x], remaining[0:i] + remaining[i + 1 :])
-
-    _make_permutations([], nums)
-    return res
+        _make_permutations([], nums)
+        return res
 
 
 solution = Solution()
