@@ -4,7 +4,7 @@ class Solution:
 
 
 def check_subarray_sum(l: int, r: int, cur_sum: int, nums: list[int], k: int) -> bool:
-    if l >= r:
+    if r - l < 1:
         return False
     if cur_sum % k == 0:
         return True
