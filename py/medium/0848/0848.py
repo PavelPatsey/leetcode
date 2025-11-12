@@ -1,6 +1,12 @@
 class Solution:
     def shiftingLetters(self, s: str, shifts: list[int]) -> str:
-        pass
+        total = 0
+        res = ""
+        for x, char in zip(reversed(shifts), reversed(s)):
+            total += x
+            print(x, char, total)
+            res += shift(char, total)
+        return res[::-1]
 
 
 def shift(char: str, x: int) -> str:
@@ -11,3 +17,7 @@ def shift(char: str, x: int) -> str:
 assert shift("a", 1) == "b"
 assert shift("z", 1) == "a"
 assert shift("a", 17) == "r"
+
+
+solution = Solution()
+assert solution.shiftingLetters("abc", [3, 5, 9]) == "rpl"
