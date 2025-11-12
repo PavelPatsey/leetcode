@@ -1,23 +1,24 @@
 class Solution:
     def maxNumberOfFamilies(self, n: int, reservedSeats: list[list[int]]) -> int:
         grid = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] for _ in range(n + 1)]
-        # print(grid)
         for row, seat in reservedSeats:
             grid[row][seat] = 1
         counter = 0
         for i in range(1, n + 1):
-            row = grid[i]
-            if sum(row[2:10]) == 0:
-                counter += 2
-            elif sum(row[2:6]) == 0:
-                counter += 1
-            elif sum(row[4:8]) == 0:
-                counter += 1
-            elif sum(row[6:10]) == 0:
-                counter += 1
-            else:
-                pass
+            counter += get_counter(grid[i])
         return counter
+
+
+def get_counter(row: list) -> int:
+    if sum(row[2:10]) == 0:
+        return 2
+    if row[2] == 0:
+        return 1
+    if row[4] == 0:
+        return 1
+    if row[6] == 0:
+        return 1
+    return 0
 
 
 solution = Solution()
