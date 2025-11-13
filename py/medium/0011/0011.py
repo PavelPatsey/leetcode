@@ -3,9 +3,10 @@ class Solution:
         l, r = 0, len(height) - 1
         res = 0
         while l < r:
-            area = (r - l) * min(height[l], height[r])
+            hl, hr = height[l], height[r]
+            area = (r - l) * min(hl, hr)
             res = max(res, area)
-            if height[l] < height[r]:
+            if hl < hr:
                 l += 1
             else:
                 r -= 1
