@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import List, Optional
 
 
 class TreeNode:
@@ -15,14 +15,13 @@ class Solution:
         def dfs(node: Optional[TreeNode], acc: list) -> None:
             if node is None:
                 return
-            new_acc = acc + [node.val]
+            acc = acc + [node.val]
             if node.left is None and node.right is None:
-                if sum(new_acc) == targetSum:
-                    res.append(new_acc)
+                if sum(acc) == targetSum:
+                    res.append(acc)
                 return
-
-            dfs(node.left, new_acc)
-            dfs(node.right, new_acc)
+            dfs(node.left, acc)
+            dfs(node.right, acc)
 
         dfs(root, [])
         return res
