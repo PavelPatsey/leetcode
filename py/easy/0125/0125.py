@@ -2,7 +2,7 @@ class Solution:
     def isPalindrome(self, s: str) -> bool:
         l = 0
         r = len(s) - 1
-        while l <= r:
+        while l < r:
             if not s[l].isalnum():
                 l += 1
             elif not s[r].isalnum():
@@ -19,3 +19,4 @@ solution = Solution()
 assert solution.isPalindrome("A man, a plan, a canal: Panama") == True
 assert solution.isPalindrome("race a car") == False
 assert solution.isPalindrome("0P") == False
+assert solution.isPalindrome("abvba") == True
