@@ -3,9 +3,9 @@ class Solution:
         l = 0
         r = len(s) - 1
         while l <= r:
-            if not is_valid(s[l]):
+            if not s[l].isalnum():
                 l += 1
-            elif not is_valid(s[r]):
+            elif not s[r].isalnum():
                 r -= 1
             elif s[l].lower() == s[r].lower():
                 l += 1
@@ -13,10 +13,6 @@ class Solution:
             else:
                 return False
         return True
-
-
-def is_valid(char: str) -> bool:
-    return char.isalpha() or char.isdigit()
 
 
 solution = Solution()
