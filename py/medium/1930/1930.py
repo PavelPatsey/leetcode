@@ -1,4 +1,5 @@
 from collections import defaultdict
+from typing import List
 
 
 class Solution:
@@ -6,12 +7,21 @@ class Solution:
         indexes = defaultdict(list)
         for i, c in enumerate(s):
             indexes[c].append(i)
-        intervals = {k: (v[0], v[-1]) for k, v in indexes.items() if len(v) >= 2}
-        ls = {char: len(set(s[v[0] + 1 : v[1]])) for char, v in intervals.items()}
-        return sum(ls.values())
+        lengths = {
+            char: get_len_set(s, indxs)
+            for char, indxs in indexes.items()
+            if len(indxs) >= 2
+        }
+        return sum(lengths.values())
 
 
-s = Solution()
-assert s.countPalindromicSubsequence("aabca") == 3
-assert s.countPalindromicSubsequence("adc") == 0
-assert s.countPalindromicSubsequence("bbcbaba") == 4
+def get_len_set(s: str, indexes: List) -> int:
+    first, last = indexes[0], indexes[-1]
+    char_set = set(s[first + 1 : last])
+    return len(char_set)
+
+
+solution = Solution()
+assert solution.countPalindromicSubsequence("aabca") == 3
+assert solution.countPalindromicSubsequence("adc") == 0
+assert solution.countPalindromicSubsequence("bbcbaba") == 4
