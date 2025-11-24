@@ -7,7 +7,8 @@ class Solution:
         bin_n = 0
         for bit in nums:
             bin_n = (bin_n << 1) | bit
-            res.append(bin_n % 5 == 0)
+            bin_n = bin_n % 5
+            res.append(bin_n == 0)
         return res
 
 
