@@ -4,10 +4,10 @@ from typing import List
 class Solution:
     def prefixesDivBy5(self, nums: List[int]) -> List[bool]:
         res = []
-        s = ""
-        for n in nums:
-            s += str(n)
-            res.append(int(s, 2) % 5 == 0)
+        bin_n = 0
+        for bit in nums:
+            bin_n = (bin_n << 1) | bit
+            res.append(bin_n % 5 == 0)
         return res
 
 
