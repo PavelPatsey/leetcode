@@ -6,6 +6,7 @@ class Solution:
         n = 1
         while n % k != 0 and res <= k:
             n = n * 10 + 1
+            n = n % k
             res += 1
         return res
 
