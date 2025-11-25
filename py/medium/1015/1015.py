@@ -1,23 +1,13 @@
 class Solution:
     def smallestRepunitDivByK(self, k: int) -> int:
-        last_digit = k % 10
-        if last_digit in {2, 4, 5, 6, 8}:
+        if k % 2 == 0 or k % 5 == 0:
             return -1
-        n = 1
-        b = 1
-        rem = b % k
-        total = rem
         res = 1
-        while total % k != 0 and b % k != 0:
-            b = b * 10
-            n += b
-            rem = b % k
-            total = total % k
-            total = total + rem
+        n = 1
+        while n % k != 0 and res <= k:
+            n = n * 10 + 1
             res += 1
-        if total % k == 0:
-            return res
-        return -1
+        return res
 
 
 solution = Solution()
