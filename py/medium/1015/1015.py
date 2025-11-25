@@ -12,6 +12,7 @@ class Solution:
             b = b * 10
             n += b
             rem = b % k
+            total = total % k
             total = total + rem
             res += 1
         if total % k == 0:
