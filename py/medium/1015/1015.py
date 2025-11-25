@@ -1,6 +1,7 @@
 class Solution:
     def smallestRepunitDivByK(self, k: int) -> int:
-        if str(k)[-1] in {"2", "4", "5", "6", "8"}:
+        last_digit = k % 10
+        if last_digit in {2, 4, 5, 6, 8}:
             return -1
         n = 1
         b = 1
@@ -22,3 +23,5 @@ solution = Solution()
 assert solution.smallestRepunitDivByK(1) == 1
 assert solution.smallestRepunitDivByK(2) == -1
 assert solution.smallestRepunitDivByK(3) == 3
+assert solution.smallestRepunitDivByK(6) == -1
+assert solution.smallestRepunitDivByK(18367) == 6122
