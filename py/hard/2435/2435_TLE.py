@@ -9,7 +9,7 @@ class Solution:
         res = 0
 
         def dfs(r: int, c: int, total: int):
-            if not (0 <= r < ROWS and 0 <= c < COLS):
+            if r == ROWS or c == COLS:
                 return
             new_total = (total + grid[r][c]) % k
             if (r, c) == (ROWS - 1, COLS - 1):
