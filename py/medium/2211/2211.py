@@ -4,26 +4,16 @@ class Solution:
         stack = []
         for d in directions:
             if d == "R":
-                if stack and stack[-1] in {"L", "S"}:
-                    stack = []
                 stack.append(d)
             elif d == "S":
-                if stack and stack[-1] in {"L", "S"}:
-                    stack = ["S"]
-                else:
-                    res += count_right(stack)
-                    stack = ["S"]
-            elif d == "L":
-                if stack and stack[-1] == "S":
-                    res += 1
-                    stack = ["S"]
-                elif stack and stack[-1] == "R":
+                res += count_right(stack)
+                stack = ["S"]
+            else:
+                if stack and stack[-1] in {"S", "R"}:
                     res += count_right(stack) + 1
                     stack = ["S"]
                 else:
                     stack.append(d)
-            else:
-                assert False
         return res
 
 
