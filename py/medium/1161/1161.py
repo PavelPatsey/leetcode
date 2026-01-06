@@ -1,4 +1,3 @@
-from collections import deque
 from typing import Optional
 
 
@@ -14,20 +13,22 @@ class Solution:
         max_sum = -float("inf")
         i = 0
         res = i
-        q = deque([root])
+        q = [root]
+        s = root.val
         while q:
             i += 1
-            s = sum(x.val for x in q)
             if s > max_sum:
                 max_sum = s
                 res = i
-            nq = deque([])
-            while q:
-                node = q.popleft()
+            nq = []
+            s = 0
+            for node in q:
                 if node.left:
                     nq.append(node.left)
+                    s += node.left.val
                 if node.right:
                     nq.append(node.right)
+                    s += node.right.val
             q = nq
         return res
 
