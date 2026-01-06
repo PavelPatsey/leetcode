@@ -14,22 +14,20 @@ class Solution:
         i = 0
         res = i
         q = [root]
-        s = root.val
         while q:
             i += 1
-            if s > max_sum:
-                max_sum = s
-                res = i
             nq = []
             s = 0
             for node in q:
+                s += node.val
                 if node.left:
                     nq.append(node.left)
-                    s += node.left.val
                 if node.right:
                     nq.append(node.right)
-                    s += node.right.val
             q = nq
+            if s > max_sum:
+                res = i
+                max_sum = s
         return res
 
 
