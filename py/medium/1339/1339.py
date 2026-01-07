@@ -22,7 +22,7 @@ class Solution:
             return left + right + node.val
 
         total = _dfs(root)
-        res = max([x * (total - x) for x in sums])
+        res = max(x * (total - x) for x in sums)
         return res % (10**9 + 7)
 
 
