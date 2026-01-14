@@ -3,7 +3,6 @@ EPSILON = 1e-05
 
 class Solution:
     def separateSquares(self, squares: list[list[int]]) -> float:
-        squares = sorted(squares, key=lambda x: x[1])
         total = 0
         max_y = 0
         for _, y, l in squares:
