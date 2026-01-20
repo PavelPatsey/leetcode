@@ -4,9 +4,8 @@ class Solution:
 
 
 def f(n) -> int:
-    max_x = (1 << n.bit_length()) - 1
     x = 0
-    while x <= max_x:
+    while x <= n:
         if x | (x + 1) == n:
             return x
         x += 1
