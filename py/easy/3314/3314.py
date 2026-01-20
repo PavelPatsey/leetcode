@@ -1,15 +1,14 @@
 class Solution:
     def minBitwiseArray(self, nums: list[int]) -> list[int]:
+        def f(n) -> int:
+            x = 0
+            while x <= n:
+                if x | (x + 1) == n:
+                    return x
+                x += 1
+            return -1
+
         return [f(n) for n in nums]
-
-
-def f(n) -> int:
-    x = 0
-    while x <= n:
-        if x | (x + 1) == n:
-            return x
-        x += 1
-    return -1
 
 
 solution = Solution()
