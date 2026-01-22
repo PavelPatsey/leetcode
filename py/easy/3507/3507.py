@@ -2,18 +2,19 @@ class Solution:
     def minimumPairRemoval(self, nums: list[int]) -> int:
         non_dec = None
         c = 0
-        while not non_dec and len(nums) > 1:
+        while not non_dec:
             non_dec = True
-            s = nums[0] + nums[1]
-            j = 0
+            min_sum = float("inf")
+            j = None
             for i in range(len(nums) - 1):
                 if nums[i] > nums[i + 1]:
                     non_dec = False
-                if nums[i] + nums[i + 1] < s:
-                    s = nums[i] + nums[i + 1]
+                pair_sum = nums[i] + nums[i + 1]
+                if pair_sum < min_sum:
+                    min_sum = pair_sum
                     j = i
             if not non_dec:
-                nums[j : j + 2] = [s]
+                nums[j : j + 2] = [min_sum]
                 c += 1
         return c
 
