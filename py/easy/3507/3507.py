@@ -12,10 +12,9 @@ class Solution:
                 if nums[i] + nums[i + 1] < s:
                     s = nums[i] + nums[i + 1]
                     j = i
-            if non_dec:
-                return c
-            nums[j : j + 2] = [s]
-            c += 1
+            if not non_dec:
+                nums[j : j + 2] = [s]
+                c += 1
         return c
 
 
