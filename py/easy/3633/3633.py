@@ -1,15 +1,3 @@
-def calc_duration(ls: int, ld: int, ws: int, wd: int) -> int:
-    if ls < ws:
-        e1 = ls + ld
-        s2 = max(e1, ws)
-        res = s2 + wd
-    else:
-        e1 = ws + wd
-        s2 = max(e1, ls)
-        res = s2 + ld
-    return res
-
-
 class Solution:
     def earliestFinishTime(
         self,
@@ -18,10 +6,21 @@ class Solution:
         waterStartTime: list[int],
         waterDuration: list[int],
     ) -> int:
-        res = 1_000_000
+        def calc_time(ls: int, ld: int, ws: int, wd: int) -> int:
+            if ls < ws:
+                e1 = ls + ld
+                s2 = max(e1, ws)
+                res = s2 + wd
+            else:
+                e1 = ws + wd
+                s2 = max(e1, ls)
+                res = s2 + ld
+            return res
+
+        res = float("inf")
         for ls, ld in zip(landStartTime, landDuration):
             for ws, wd in zip(waterStartTime, waterDuration):
-                res = min(res, calc_duration(ls, ld, ws, wd))
+                res = min(res, calc_time(ls, ld, ws, wd))
         return res
 
 
